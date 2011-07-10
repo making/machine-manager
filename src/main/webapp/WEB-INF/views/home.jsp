@@ -246,7 +246,7 @@ label {
                                 function() {
                                     $.post('config/update', $('#configForm')
                                             .serialize(), function(res) {
-                                        console.log(res);
+                                        // console.log(res);
                                         if (res.result === 'success'
                                                 && res.id != null) {
                                             $('#id').val(res.id);
