@@ -9,12 +9,16 @@
 
 <link rel="stylesheet" type="text/css"
     href="<c:url value="/" />css/ui.jqgrid.css" />
-<script type="text/javascript"
-    src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script type="text/javascript"
-    src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css"
-    href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/smoothness/jquery-ui.css" />
+    href="<c:url value="/" />css/bootstrap.css" />
+<script type="text/javascript"
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript"
+    src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" -->
+<!--     href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/smoothness/jquery-ui.css" /> -->
+<link rel="stylesheet" type="text/css"
+    href="<c:url value="/" />css/custom-theme/jquery-ui-1.8.16.custom.css" />
 <script src="<c:url value="/" />js/i18n/grid.locale-en.js"
     type="text/javascript"></script>
 <script src="<c:url value="/" />js/jquery.jqGrid.src.js"
@@ -23,7 +27,9 @@
 body {
     font-size: 62.5%;
 }
-
+fieldset legend {
+    font-size: 100%;
+}
 td,th {
     font-size: 80%;
 }
@@ -45,7 +51,7 @@ label {
         </ul>
         <div id="crud">
             <fieldset>
-                <legend>マシン一覧</legend>
+                <legend class="ui-state-highlight">マシン一覧</legend>
                 <div>
                     <table id="machines"></table>
                     <div id="pager"></div>
@@ -73,7 +79,7 @@ label {
                 </div>
             </fieldset>
             <fieldset>
-                <legend>ファイルDL</legend>
+                <legend class="ui-state-highlight">ファイルDL</legend>
                 <div>
                     <button id="download">hostsファイル</button>
                 </div>
@@ -82,7 +88,7 @@ label {
         <div id="config">
             <form:form id="configForm" modelAttribute="config">
                 <fieldset>
-                    <legend>設定情報登録フォーム</legend>
+                    <legend class="ui-state-highlight">設定情報登録フォーム</legend>
                     <div>
                         <label for="hostsHeader">Hostsファイル ヘッダー</label>
                         <form:hidden path="id" />
@@ -127,7 +133,7 @@ label {
                         var machines = $('#machines');
                         var lastSelected;
                         machines.jqGrid({
-                            url : 'machine/list',
+                            url : '<c:url value="/" />/machine/list',
                             datatype : 'json',
                             colNames : [ 'IP', 'ホスト名', 'OS', 'CPU', 'メモリ',
                                     'ストレージ', 'ユーザ名', 'パスワード', '仮想', '備考' ],
@@ -192,15 +198,15 @@ label {
                                     cols : '20'
                                 }
                             } ],
-                            height : 300,
-                            rowNum : 10,
+                            height : 450,
+                            rowNum : 20,
                             rowList : [ 10, 20, 30 ],
                             pager : '#pager',
                             sortname : 'ip',
                             viewrecords : true,
                             sortorder : 'asc',
                             caption : 'マシン一覧',
-                            editurl : 'machine/update',
+                            editurl : '<c:url value="/" />/machine/update',
                             /*
                             onSelectRow : function(id) {
                                 if (id && id !== lastSelected) {
@@ -216,27 +222,27 @@ label {
 
                         machines.jqGrid('navGrid', '#pager', {}, //options
                         {
-                            url : 'machine/update',
+                            url : '<c:url value="/" />/machine/update',
                             editCaption : 'マシン情報編集'
                         }, // edit options
                         {
-                            url : 'machine/insert',
+                            url : '<c:url value="/" />/machine/insert',
                             addCaption : 'マシン追加'
                         }, // add options
                         {
-                            url : 'machine/delete',
+                            url : '<c:url value="/" />/machine/delete',
                             caption : 'マシン削除',
                             msg : '選択したマシン情報を削除します'
                         },// del options
                         {
-                            url : 'machine/search',
+                            url : '<c:url value="/" />/machine/search',
                             caption : 'マシン検索'
                         } // search options
                         );
 
                         $('#add').click(function() {
                             machines.editGridRow('new', {
-                                url : 'machine/insert'
+                                url : '<c:url value="/" />/machine/insert'
                             });
                         });
                         $('#download').click(function() {
@@ -244,7 +250,7 @@ label {
                         });
                         $('#configUpdate').click(
                                 function() {
-                                    $.post('config/update', $('#configForm')
+                                    $.post('<c:url value="/" />/config/update', $('#configForm')
                                             .serialize(), function(res) {
                                         // console.log(res);
                                         if (res.result === 'success'
