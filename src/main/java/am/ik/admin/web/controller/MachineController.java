@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import am.ik.admin.bean.Machine;
 import am.ik.admin.editor.IpAddressEditor;
 import am.ik.admin.service.MachineService;
+import am.ik.admin.util.IpAddressUtil;
 import am.ik.support.jqgrid.JqGridRequest;
 import am.ik.support.jqgrid.JqGridResponse;
 import am.ik.support.jqgrid.JqGridResponseBuilder;
@@ -45,7 +47,6 @@ public class MachineController {
         logger.debug("request={}, isSearch={}", req, isSearch);
 
         List<Machine> machines = machineService.listAllMachines(req);
-
         logger.debug("machines={}", machines);
         int records = (int) machineService.getTotalSize(req);
         logger.debug("records={} rows={} page={}",
@@ -80,5 +81,13 @@ public class MachineController {
     public void delete(Machine machine) {
         logger.debug("delete machine={}", machine);
         machineService.delete(machine.getId());
+    }
+
+    @RequestMapping("/ping/{ip}")
+    @ResponseBody
+    public boolean ping(@PathVariable String ip) {
+        logger.debug("ping {}", ip);
+        boolean ret = IpAddressUtil.ping(ip);
+        return ret;
     }
 }
