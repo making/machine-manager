@@ -161,7 +161,9 @@ var application = {
             $("td[aria-describedby=machines_ip]").each(function(e) {
                 var self = $(this);
                 var ip = self.text();
+                self.text("pinging..");
                 $.get(contextRoot + '/machine/ping/' + ip + '/', function(ret) {
+                    self.text(ip);
                     self.css("background-color", ret ? "lime" : "red");
                 })
             });
