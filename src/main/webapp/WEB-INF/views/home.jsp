@@ -17,8 +17,19 @@
     src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript"
     src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-<link rel="stylesheet" type="text/css"
-    href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/cupertino/jquery-ui.css" />
+<c:choose>
+    <c:when test="">
+        <c:otherwise></c:otherwise>
+    </c:when>
+    <c:when test="${config.theme == 'custom-theme'}">
+        <link rel="stylesheet" type="text/css"
+            href="${contextRoot}/css/custom-theme/jquery-ui-1.8.16.custom.css" />
+    </c:when>
+    <c:otherwise>
+        <link rel="stylesheet" type="text/css"
+            href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/${config.theme}/jquery-ui.css" />
+    </c:otherwise>
+</c:choose>
 <script src="${contextRoot}/js/i18n/grid.locale-en.js"
     type="text/javascript"></script>
 <script src="${contextRoot}/js/jquery.jqGrid.src.js"
@@ -93,11 +104,17 @@ label {
                 <fieldset>
                     <legend class="ui-state-highlight">設定情報登録フォーム</legend>
                     <div>
-                        <label for="hostsHeader">Hostsファイル ヘッダー</label>
+                        <label for="theme">theme</label>
+                        <form:select path="theme"
+                            items="${themeCodeList}" />
+                        <br> <label for="hostsHeader">Hostsファイル
+                            ヘッダー</label>
                         <form:hidden path="id" />
                         <form:textarea path="hostsHeader"
                             style="width:600px; height: 400px;"></form:textarea>
-                        <br>
+
+                    </div>
+                    <div>
                         <button id="configUpdate">更新</button>
                     </div>
                 </fieldset>

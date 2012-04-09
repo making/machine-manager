@@ -148,8 +148,11 @@ var application = {
                     $.post(contextRoot + '/config/update', $('#configForm')
                             .serialize(), function(res) {
                         // console.log(res);
-                        if (res.result === 'success' && res.id != null) {
-                            $('#id').val(res.id);
+                        if (res.result === 'success') {
+                            if (res.id != null) {
+                                $('#id').val(res.id);
+                            }
+                            location.href = contextRoot + "/";
                         }
                     }, 'json');
                     return false;

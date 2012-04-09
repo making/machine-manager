@@ -1,5 +1,8 @@
 package am.ik.admin.web.controller;
 
+import java.util.Map;
+
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -24,6 +27,9 @@ public class HomeController {
     @Inject
     protected ConfigService configService;
 
+    @Resource
+    private Map<String, String> themeCodeList;
+
     /**
      * Simply selects the home view to render by returning its name.
      */
@@ -32,6 +38,7 @@ public class HomeController {
         logger.info("Welcome home!");
         Config config = configService.getConfig();
         model.addAttribute(config);
+        model.addAttribute("themeCodeList", themeCodeList);
         return "home";
     }
 

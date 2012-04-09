@@ -7,10 +7,14 @@ import com.google.code.morphia.annotations.Id;
 
 @Entity(noClassnameStored = true)
 public class Config {
+    private static final String DEFAULT_THEME = "cupertino";
+
     @Id
     private ObjectId id;
 
     private String hostsHeader;
+
+    private String theme = DEFAULT_THEME;
 
     public Config() {
     }
@@ -31,20 +35,17 @@ public class Config {
         this.hostsHeader = hostsHeader;
     }
 
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Config [");
-        if (id != null) {
-            builder.append("id=");
-            builder.append(id);
-            builder.append(", ");
-        }
-        if (hostsHeader != null) {
-            builder.append("hostsHeader=");
-            builder.append(hostsHeader);
-        }
-        builder.append("]");
-        return builder.toString();
+        return "Config [id=" + id + ", hostsHeader=" + hostsHeader + ", theme="
+                + theme + "]";
     }
 }

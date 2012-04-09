@@ -2,8 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <!-- Scans within the base package of the application for @Components 
@@ -15,4 +17,33 @@
         <property name="host" value="localhost" />
         <!-- <property name="host" value="192.168.11.116" /> -->
     </bean>
+
+    <util:map id="themeCodeList">
+        <entry key="base" value="base" />
+        <entry key="black-tie" value="black-tie" />
+        <entry key="blitzer" value="blitzer" />
+        <entry key="cupertino" value="cupertino" />
+        <entry key="dark-hive" value="dark-hive" />
+        <entry key="dot-luv" value="dot-luv" />
+        <entry key="eggplant" value="eggplant" />
+        <entry key="excite-bike" value="excite-bike" />
+        <entry key="flick" value="flick" />
+        <entry key="hot-sneaks" value="hot-sneaks" />
+        <entry key="humanity" value="humanity" />
+        <entry key="le-frog" value="le-frog" />
+        <entry key="mint-choc" value="mint-choc" />
+        <entry key="overcast" value="overcast" />
+        <entry key="pepper-grinder" value="pepper-grinder" />
+        <entry key="redmond" value="redmond" />
+        <entry key="smoothness" value="smoothness" />
+        <entry key="south-street" value="south-street" />
+        <entry key="start" value="start" />
+        <entry key="sunny" value="sunny" />
+        <entry key="swanky-purse" value="swanky-purse" />
+        <entry key="trontastic" value="trontastic" />
+        <entry key="ui-darkness" value="ui-darkness" />
+        <entry key="ui-lightness" value="ui-lightness" />
+        <entry key="vader" value="vader" />
+        <entry key="custom-theme" value="bootstrap" />
+    </util:map>
 </beans>
